@@ -1,0 +1,31 @@
+{
+  "name": "workout-cli",
+  "version": "0.0.0",
+  "description": "cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "workout": "cli.js"
+  },
+  "preferGlobal": "true",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewnd9/workout-cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "ewnd9 <ewndnine@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dot-file-config": "^0.3.0",
+    "inquirer-bluebird": "^1.0.1",
+    "meow": "^3.3.0",
+    "moment": "^2.10.6",
+    "node-crontab": "0.0.8",
+    "node-notifier": "^4.2.3",
+    "pm2": "^0.14.5"
+  }
+}
