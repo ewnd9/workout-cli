@@ -16,6 +16,7 @@ var cli = meow({
 var lock = require('./lib/lock');
 var notify = require('./lib/notify');
 var config = require('./lib/config');
+var scheduler = require('./scheduler');
 
 if (cli.flags.start) {
   pm2.start();
@@ -25,7 +26,8 @@ if (cli.flags.start) {
   pm2.restart();
 } else if (cli.flags.last) {
   var period = config.data.period;
-  var last = require('./scheduler').last();
+  var last = scheduler.last();
+
   console.log((period - last) + ' minutes left');
 } else if (cli.flags.setup) {
   require('./lib/setup-dialog')();

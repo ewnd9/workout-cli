@@ -12,6 +12,11 @@ var minsDiff = function(t2) {
   return moment().diff(t2, 'minutes');
 };
 
+var reload = module.exports.reload = function() {
+  config.data.lastMain = moment();
+  config.save();
+};
+
 var isAfterSleep = function() {
   var now = moment();
   var result = minsDiff(now, config.data.lastTick) > 2;
