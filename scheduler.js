@@ -19,21 +19,24 @@ var reload = module.exports.reload = function() {
 
 var isAfterSleep = function() {
   var now = moment();
-  var result = minsDiff(now, config.data.lastTick) > 2;
+  var shouldReset = minsDiff(now, config.data.lastTick) > 2;
 
   config.data.lastTick = moment();
 
-  if (result) {
+  if (shouldReset) {
     config.data.lastMain = moment();
   }
 
   config.save();
 
-  return result;
+  return shouldReset;
 };
 
 var job = function(delay, main) {
-  if (!isAfterSleep() && minsDiff(config.data.lastMain) >= delay) {
+  var cond = isAfterSleep();
+  var diff = minsDiff(config.data.lastMain);
+
+  if (!cond && (diff >= delay || (delay - diff) < 0)) {
     main();
     config.data.lastMain = moment();
     config.save();

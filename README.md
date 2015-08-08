@@ -3,9 +3,14 @@
 ## Install
 
 ```
+# package for running workout-cli in background
 $ npm install -g pm2
-$ pm2 startup # instruction for setup autostart of pm2 after reboot
-$ npm install -g workout-cli # in furure, now just clone repo && npm link
+
+# instruction for setup autostart of pm2 after reboot
+$ pm2 startup
+
+# in future, now just clone repo && npm link
+$ npm install -g workout-cli
 ```
 
 ## Usage
@@ -13,6 +18,8 @@ $ npm install -g workout-cli # in furure, now just clone repo && npm link
 ```
 $ workout --start
 $ workout --stop
+$ workout --restart
+$ workout --status
 ```
 
 ## Draft

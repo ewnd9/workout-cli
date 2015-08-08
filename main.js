@@ -1,35 +1,34 @@
 var moment = require('moment');
 
 var dateMessage = function(prefix) {
-  return prefix + ':::' + moment().toString();
+  return prefix + ' ::: ' + moment().toString();
 };
 
 var lock = require('./lib/lock');
 var notify = require('./lib/notify');
 var config = require('./lib/config');
 
-var annoyingProgress = false;
+var sessionInProgress = false;
 
-var startAnnoying = function() {
+var sessionLoop = function() {
   if (lock.isLocked()) {
-    annoyingProgress = true;
-
-    notify('annoying');
-    setTimeout(startAnnoying, 3000);
+    notify('$ workout');
+    setTimeout(sessionLoop, 2000);
   } else {
-    annoyingProgress = false;
-
-    console.log(dateMessage('startAnnoying !lock.isLocked()'));
+    // sessionInProgress = false;
+    console.log(dateMessage('stop session'));
   }
 };
 
 var main = function() {
-  if (!annoyingProgress) {
-    lock.setLock(true);
-    startAnnoying();
-  }
+  console.log(dateMessage('running (sessionInProgress=' + sessionInProgress + ', lock=' + lock.isLocked() + ')'));
 
-  console.log(dateMessage('hi ' + annoyingProgress));
+  // if (!sessionInProgress) {
+    // sessionInProgress = true;
+
+    lock.setLock(true);
+    sessionLoop();
+  // }
 };
 
 var period = config.data.period || 30;
