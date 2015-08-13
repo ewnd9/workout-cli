@@ -12,6 +12,7 @@ var cli = meow({
     '  workout --stop',
     '  workout --restart',
     '  workout --status',
+    '  workout --session',
     '',
     'Data',
     '  ' + config.path
@@ -40,6 +41,11 @@ if (cli.flags.start) {
   showStatus();
 } else if (cli.flags.data) {
   require('./lib/data-dialog')();
+} else if (cli.flags.session) {
+  require('./lib/exercises-dialog')(true).then(function() {
+    lock.setLock(false);
+    scheduler.reload();
+  });
 } else if (cli.flags.setup) {
   require('./lib/setup-dialog')();
 } else if (cli.flags.debug) {
