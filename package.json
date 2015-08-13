@@ -1,7 +1,7 @@
 {
   "name": "workout-cli",
-  "version": "0.0.0",
-  "description": "cli",
+  "version": "0.1.0",
+  "description": "Interval reminder to distract from laptop",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +20,7 @@
   "author": "ewnd9 <ewndnine@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "dot-file-config": "^0.3.0",
+    "dot-file-config": "^0.4.0",
     "inquirer-bluebird": "^1.0.1",
     "meow": "^3.3.0",
     "moment": "^2.10.6",

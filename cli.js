@@ -20,6 +20,13 @@ var notify = require('./lib/notify');
 var config = require('./lib/config');
 var scheduler = require('./scheduler');
 
+var showStatus = function() {
+  var period = config.data.period;
+  var last = scheduler.last();
+
+  console.log((period - last) + ' minutes left');
+};
+
 if (cli.flags.start) {
   pm2.start();
 } else if (cli.flags.stop) {
@@ -27,12 +34,12 @@ if (cli.flags.start) {
 } else if (cli.flags.restart) {
   pm2.restart();
 } else if (cli.flags.status) {
-  var period = config.data.period;
-  var last = scheduler.last();
-
-  console.log((period - last) + ' minutes left');
+  showStatus();
 } else if (cli.flags.setup) {
   require('./lib/setup-dialog')();
+} else if (cli.flags.debug) {
+  showStatus();
+  console.log('lock=' + lock.isLocked());
 } else if (lock.isLocked()) {
   require('./lib/exercises-dialog')().then(function() {
     lock.setLock(false);

@@ -1,5 +1,7 @@
 # workout-cli
 
+Interval reminder to distract from laptop
+
 ## Install
 
 ```

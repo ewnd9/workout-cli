@@ -18,12 +18,12 @@ var reload = module.exports.reload = function() {
 };
 
 var isAfterSleep = function() {
-  var now = moment();
-  var shouldReset = minsDiff(now, config.data.lastTick) > 2;
+  var shouldReset = minsDiff(config.data.lastTick) > 2;
 
   config.data.lastTick = moment();
 
   if (shouldReset) {
+    console.log('shouldReset', moment());
     config.data.lastMain = moment();
   }
 
