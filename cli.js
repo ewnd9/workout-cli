@@ -3,7 +3,7 @@
 'use strict';
 
 var meow = require('meow');
-var pm2 = require('./lib/pm2-utils');
+var config = require('./lib/config');
 
 var cli = meow({
   help: [
@@ -11,13 +11,16 @@ var cli = meow({
     '  workout --start',
     '  workout --stop',
     '  workout --restart',
-    '  workout --status'
+    '  workout --status',
+    '',
+    'Data',
+    '  ' + config.path
   ]
 });
 
+var pm2 = require('./lib/pm2-utils');
 var lock = require('./lib/lock');
 var notify = require('./lib/notify');
-var config = require('./lib/config');
 var scheduler = require('./scheduler');
 
 var showStatus = function() {
@@ -35,6 +38,8 @@ if (cli.flags.start) {
   pm2.restart();
 } else if (cli.flags.status) {
   showStatus();
+} else if (cli.flags.data) {
+  require('./lib/data-dialog')();
 } else if (cli.flags.setup) {
   require('./lib/setup-dialog')();
 } else if (cli.flags.debug) {
