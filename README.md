@@ -1,6 +1,9 @@
 # workout-cli
 
-Interval reminder to distract from laptop
+Remind you to distract from laptop from time to time
+
+:warning: You need to `$ workout --restart` after reboot anyway due to strange
+bug with invisible notifications  
 
 ## Install
 
@@ -11,24 +14,26 @@ $ npm install -g pm2
 # instruction for setup autostart of pm2 after reboot
 $ pm2 startup
 
-# in future, now just clone repo && npm link
 $ npm install -g workout-cli
 ```
 
 ## Usage
 
 ```
-$ workout --start
-$ workout --stop
-$ workout --restart
-$ workout --status
+workout --setup
+
+# app lifecycle
+workout --start
+workout --stop
+workout --restart
+workout --status
+
+# start completing scheduled session
+workout --session
+
+# skip scheduled session with given excuse
+workout --excuse <excuse>
 ```
-
-## Draft
-
-- every n-minutes notifications
-- stop when complete dialog via `$ workout` or `$ workout skip` to write excuse
-- generate statistics
 
 ## Inspiration
 

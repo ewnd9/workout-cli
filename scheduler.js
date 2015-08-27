@@ -33,11 +33,14 @@ var isAfterSleep = function() {
 };
 
 var job = function(delay, main) {
+  config.reload();
+
   var cond = isAfterSleep();
   var diff = minsDiff(config.data.lastMain);
 
-  if (!cond && (diff >= delay || (delay - diff) < 0)) {
+  if (!cond && diff >= delay) {
     main();
+    
     config.data.lastMain = moment();
     config.save();
   }

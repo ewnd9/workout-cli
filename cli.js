@@ -8,11 +8,20 @@ var config = require('./lib/config');
 var cli = meow({
   help: [
     'Usage',
+    '',
+    '  workout --setup',
+    '',
+    '  # app lifecycle',
     '  workout --start',
     '  workout --stop',
     '  workout --restart',
     '  workout --status',
+    '',
+    '  # start completing scheduled session',
     '  workout --session',
+    '',
+    '  # skip scheduled session with given excuse',
+    '  workout --excuse <excuse>',
     '',
     'Data',
     '  ' + config.path
@@ -42,7 +51,12 @@ if (cli.flags.start) {
 } else if (cli.flags.data) {
   require('./lib/data-dialog')();
 } else if (cli.flags.session) {
-  require('./lib/exercises-dialog')(true).then(function() {
+  require('./lib/exercises-dialog').session().then(function() {
+    lock.setLock(false);
+    scheduler.reload();
+  });
+} else if (cli.flags.excuse) {
+  require('./lib/exercises-dialog').excuse(cli.input.join(' ')).then(function() {
     lock.setLock(false);
     scheduler.reload();
   });
@@ -51,10 +65,6 @@ if (cli.flags.start) {
 } else if (cli.flags.debug) {
   showStatus();
   console.log('lock=' + lock.isLocked());
-} else if (lock.isLocked()) {
-  require('./lib/exercises-dialog')().then(function() {
-    lock.setLock(false);
-  });
 } else {
   cli.showHelp();
 }
