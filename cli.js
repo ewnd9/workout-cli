@@ -56,7 +56,7 @@ if (cli.flags.start) {
     scheduler.reload();
   });
 } else if (cli.flags.excuse) {
-  require('./lib/exercises-dialog').excuse(cli.input.join(' ')).then(function() {
+  require('./lib/exercises-dialog').excuse(cli.flags.excuse).then(function() {
     lock.setLock(false);
     scheduler.reload();
   });
