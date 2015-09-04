@@ -5,6 +5,8 @@ var dateMessage = function(prefix) {
 };
 
 var lock = require('./lib/lock');
+lock.setLock(false);
+
 var notify = require('./lib/notify');
 var config = require('./lib/config');
 
@@ -12,7 +14,8 @@ var sessionInProgress = false;
 
 var sessionLoop = function() {
   if (lock.isLocked()) {
-    notify('$ workout');
+    console.log('notify');
+    notify('workout');
     setTimeout(sessionLoop, 2000);
   } else {
     // sessionInProgress = false;

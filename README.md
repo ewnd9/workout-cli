@@ -8,12 +8,6 @@ bug with invisible notifications
 ## Install
 
 ```
-# package for running workout-cli in background
-$ npm install -g pm2
-
-# instruction for setup autostart of pm2 after reboot
-$ pm2 startup
-
 $ npm install -g workout-cli
 ```
 

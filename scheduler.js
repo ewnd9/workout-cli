@@ -5,8 +5,14 @@ var config = require('dot-file-config')('.workout-cli-scheduler-npm', {
   cloudSync: false
 });
 
-config.data.lastTick = config.data.lastTick ? moment(config.data.lastTick) : moment();
-config.data.lastMain = config.data.lastMain ? moment(config.data.lastMain) : moment();
+var renewConfig = function() {
+  config.reload();
+
+  config.data.lastTick = config.data.lastTick ? moment(config.data.lastTick) : moment();
+  config.data.lastMain = config.data.lastMain ? moment(config.data.lastMain) : moment();
+};
+
+renewConfig();
 
 var minsDiff = function(t2) {
   return moment().diff(t2, 'minutes');
@@ -23,7 +29,10 @@ var isAfterSleep = function() {
   config.data.lastTick = moment();
 
   if (shouldReset) {
-    console.log('shouldReset', moment());
+    var lock = require('./lib/lock');
+    lock.setLock(false);
+    console.log('reset aftersleep', moment().format('hh:mm'));
+
     config.data.lastMain = moment();
   }
 
@@ -33,14 +42,16 @@ var isAfterSleep = function() {
 };
 
 var job = function(delay, main) {
-  config.reload();
+  renewConfig();
 
   var cond = isAfterSleep();
   var diff = minsDiff(config.data.lastMain);
 
+  console.log(cond, diff, delay, config.data.lastMain.format('hh:mm'));
+
   if (!cond && diff >= delay) {
     main();
-    
+
     config.data.lastMain = moment();
     config.save();
   }

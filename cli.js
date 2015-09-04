@@ -40,12 +40,15 @@ var showStatus = function() {
   console.log((period - last) + ' minutes left');
 };
 
-if (cli.flags.start) {
-  pm2.start();
-} else if (cli.flags.stop) {
-  pm2.stop();
+if (cli.flags.test || cli.flags.start) {
+  lock.setLock(false);
+  require('./main');
+} else if (cli.flags.testReload) {
+  lock.setLock(false);
+  scheduler.reload();
 } else if (cli.flags.restart) {
-  pm2.restart();
+  lock.setLock(false);
+  scheduler.reload();
 } else if (cli.flags.status) {
   showStatus();
 } else if (cli.flags.data) {
