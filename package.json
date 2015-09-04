@@ -21,7 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "dot-file-config": "^0.5.0",
-    "inquirer-bluebird": "^1.0.1",
+    "inquirer-menu": "0.1.1",
+    "inquirer-question": "^1.1.0",
     "meow": "^3.3.0",
     "moment": "^2.10.6",
     "node-crontab": "0.0.8",

@@ -64,7 +64,7 @@ if (cli.flags.test || cli.flags.start) {
     scheduler.reload();
   });
 } else if (cli.flags.setup) {
-  require('./lib/setup-dialog')();
+  require('./lib/menu/setup-menu')();
 } else if (cli.flags.debug) {
   showStatus();
   console.log('lock=' + lock.isLocked());
