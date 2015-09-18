@@ -54,10 +54,7 @@ if (cli.flags.test || cli.flags.start) {
 } else if (cli.flags.data) {
   require('./lib/data-dialog')();
 } else if (cli.flags.session) {
-  require('./lib/exercises-dialog').session().then(function() {
-    lock.setLock(false);
-    scheduler.reload();
-  });
+  require('./lib/menu/exercise-menu')();
 } else if (cli.flags.excuse) {
   require('./lib/exercises-dialog').excuse(cli.flags.excuse).then(function() {
     lock.setLock(false);
