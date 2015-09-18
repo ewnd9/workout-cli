@@ -1,6 +1,6 @@
 {
   "name": "workout-cli",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Remind you to distract from laptop from time to time",
   "main": "index.js",
   "scripts": {
