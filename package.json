@@ -9,6 +9,9 @@
   "bin": {
     "workout": "cli.js"
   },
+  "engine": {
+    "node": ">=5.0"
+  },
   "preferGlobal": "true",
   "repository": {
     "type": "git",
@@ -22,7 +25,7 @@
   "dependencies": {
     "bluebird": "^2.10.0",
     "dot-file-config": "^0.5.0",
-    "inquirer-menu": "0.1.1",
+    "inquirer-menu": "0.2.0",
     "inquirer-question": "^1.1.0",
     "meow": "^3.3.0",
     "moment": "^2.10.6",
